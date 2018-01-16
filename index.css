@@ -1,29 +1,22 @@
+.highlight {
+  padding: 15px;
+}
+
 .highlight code {
   font-family: 'Fira Code';
 }
 
 main h1 {
-  background-color: #673ab7;
-  color: white;
+  color: #673ab7;
   padding: 15px;
   margin: 0px;
-  font-size: 72px;
 }
 
-main h2, main p, main blockquote, main ul, main ol, main .highlighter-rouge {
-  margin-right: auto;
-  margin-left: auto;
-  width: 800px;
+main h3 {
+  color: #673ab7;
 }
 
-main h2 {
-  font-size: 48px;
-  background-color: #673ab7;
-  color: white;
-  margin-top: 100px;
-}
-
-main h2 a {
+main h3 a {
   text-decoration: none;
   color: white;
 }
