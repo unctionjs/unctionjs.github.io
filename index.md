@@ -3615,26 +3615,6 @@ isEnumerable(most.from([])) // true
 [BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
 [BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/isEnumerable.svg?maxAge=2592000&style=flat-square
 
-### [domElements](https://github.com/unctionjs/domElements#readme)()
-
-![Tests][BADGE_TRAVIS]
-![Stability][BADGE_STABILITY]
-![Dependencies][BADGE_DEPENDENCY]
-
-```
-mixed => mixed
-```
-
-An example function.
-
-``` javascript
-domElements(1) // 1
-```
-
-[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/domElements.svg?maxAge=2592000&style=flat-square
-[BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
-[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/domElements.svg?maxAge=2592000&style=flat-square
-
 ### [keyChainTree](https://github.com/unctionjs/keyChainTree#readme)()
 
 ![Tests][BADGE_TRAVIS]
