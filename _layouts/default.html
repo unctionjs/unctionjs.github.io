@@ -32,7 +32,10 @@
   </head>
   <body>
     <main>
-      {{ content }}
+      {% include toc.html html=content class="table-of-contents" %}
+      <article class="content">
+        {{ content }}
+      </article>
     </main>
   </body>
 </html>

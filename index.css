@@ -6,6 +6,23 @@
   font-family: 'Fira Code';
 }
 
+body {
+  width: 87.5%;
+  margin-left: initial;
+  margin-right: initial;
+  padding-left: initial;
+}
+
+main {
+  display: flex;
+}
+
+main .table-of-contents {
+  flex-direction: row
+}
+
+main .contents {}
+
 main h1 {
   color: #673ab7;
   padding: 15px;

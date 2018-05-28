@@ -1,14 +1,22 @@
-{% raw %}# ƒunction.js
+{% raw %}
+# unction.js
 
-![Tests](https://img.shields.io/travis/unctionjs/complete.svg?maxAge=2592000&style=flat-square)
-![Stability](https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square)
-![Dependencies](https://img.shields.io/david/unctionjs/complete.svg?maxAge=2592000&style=flat-square)
+unction.js is a collection of many functions. All functions are bound by three principles that are detailed below.
 
-The package containing all 108 individual @unctionjs packages as a single package. All functions are bound by three principles that are detailed below.
 
-## Using
+## Using unction libraries
 
-You can either install the complete package:
+You can install a package individually:
+
+```
+npm install --save @unction/treeify
+```
+
+``` javascript
+import treeify from "@unction/treeify"
+```
+
+Or you can install the **complete** package:
 
 ``` bash
 npm install --save @unction/complete
@@ -20,22 +28,10 @@ and import the function from package:
 import {treeify} from "@unction/complete"
 ```
 
-Or you can install the package individually:
 
-```
-npm install --save @unction/treeify
-```
+## Principle 1
 
-And import it individually:
-
-``` javascript
-import treeify from "@unction/treeify"
-```
-
-
-## Principle 1: All functions are curried
-
-Due to the nature of functional programming it's exceedingly valuable to have functions that are, by default, curried. Here's an erxample:
+**All functions are curried**. Due to the nature of functional programming it's exceedingly valuable to have functions that are, by default, curried. Here's an erxample:
 
 
 ``` javascript
@@ -64,9 +60,9 @@ stateTree(data)
 ```
 
 
-## Principle 2: All functions know how to deal with a finite set of primitives
+## Principle 2
 
-When using a unctionjs function you can be sure that we'll be able to handle all 6 enumerable types:
+**All functions know how to deal with a finite set of primitives**. When using a unctionjs function you can be sure that we'll be able to handle all 6 enumerable types:
 
   - Array
   - Object
@@ -76,14 +72,14 @@ When using a unctionjs function you can be sure that we'll be able to handle all
   - Stream (see: most.js)
 
 
-## Principle 3: All functions are pure by default
+## Principle 3
 
-No function will ever have any side-effects (unless otherwise noted with a `I` suffix like `shuffleI()`) and are referentially transparent.
+**All functions are pure by default**. No function will ever have any side-effects (unless otherwise noted with a `I` suffix like `shuffleI()`) and are referentially transparent.
 
 
-## Principle 4: All functions are immutable by default
+## Principle 4
 
-These functions do not mutate (unless otherwise noted with a `M` suffix like `appendM()`) the original values.
+**All functions are immutable by default**. These functions do not mutate (unless otherwise noted with a `M` suffix like `appendM()`) the original values.
 
 
 ## Raison d'exister
@@ -99,7 +95,6 @@ That said every unctionjs function will work with every ramda and lodash functio
 
 
 ## Functions
-
 
 ### [allObjectP](https://github.com/unctionjs/allObjectP#readme)()
 
@@ -437,7 +432,7 @@ attach(null)("a")(xstream.of("b")) // => a---b--=>
 ![Dependencies][BADGE_DEPENDENCY]
 
 ```
-Array<UnfinishedKeyChain> => Functor => Value
+Array<UnfinishedKeyChain> => KeyedEnumerable => Value
 ```
 
 Cascades through multiple keychains in order to arrive at a value. Null keys are replaced with the previous keychain's value.
@@ -810,16 +805,15 @@ fresh([]) // []
 
 ### [hammer](https://github.com/unctionjs/hammer#readme)()
 
-
 ![Tests][BADGE_TRAVIS]
 ![Stability][BADGE_STABILITY]
 ![Dependencies][BADGE_DEPENDENCY]
 
 ```
-Key => Record => Record
+Key => KeyedEnumerable => KeyedEnumerable
 ```
 
-Use this to de-nest a nested object.
+Use this to de-nest a nested keyed enumerable.
 
 ``` javascript
 const payload = {
@@ -1034,52 +1028,6 @@ itself(1) // 1
 [BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/itself.svg?maxAge=2592000&style=flat-square
 [BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
 [BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/itself.svg?maxAge=2592000&style=flat-square
-
-### [key](https://github.com/unctionjs/key#readme)()
-
-
-![Tests][BADGE_TRAVIS]
-![Stability][BADGE_STABILITY]
-![Dependencies][BADGE_DEPENDENCY]
-
-```
-Key => mixed => Value
-```
-
-Returns the value of a specific key on an iterable. If no key is found it returns undefined. If the second argument isn't an iterable we return undefined, to allow for graceful failure.
-
-``` javascript
-key("aaa")({aaa: "1"}) // "1"
-key("bbb")({aaa: "1"}) // undefined
-key("bbb")(undefined) // undefined
-key(0)(["aaa"]) // "aaa"
-```
-
-[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/key.svg?maxAge=2592000&style=flat-square
-
-[BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
-[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/key.svg?maxAge=2592000&style=flat-square
-
-### [keyChain](https://github.com/unctionjs/keyChain#readme)()
-
-![Tests][BADGE_TRAVIS]
-![Stability][BADGE_STABILITY]
-![Dependencies][BADGE_DEPENDENCY]
-
-```
-KeyChain => Tree => Value
-```
-
-Takes a chain of keys and a tree, traversing down and reaching the last value. If any part of the chain is undefined or not an object the result will always be undefined.
-
-``` javascript
-keyChain(["aaa", "bbb", "ccc"])({aaa: {bbb: {ccc: "1"}}}) // "1"
-keyChain(["aaa", "ddd", "ccc"])({aaa: {bbb: {ccc: "1"}}}) // undefined
-```
-
-[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/keyChain.svg?maxAge=2592000&style=flat-square
-[BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
-[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/keyChain.svg?maxAge=2592000&style=flat-square
 
 ### [lacksText](https://github.com/unctionjs/lacksText#readme)()
 
@@ -1824,7 +1772,7 @@ partition(isOdd)([1,2,3,4]) // [[1,3],[2,4]]
 ![Dependencies][BADGE_DEPENDENCY]
 
 ```
-KeyChain => Functor => Array
+KeyChain => KeyedEnumerable => Array
 ```
 
 Given a keychain and records return the values at the keychain for each record.
@@ -1984,36 +1932,6 @@ which returns
 [BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/recordFromEntity.svg?maxAge=2592000&style=flat-square
 [BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
 [BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/recordFromEntity.svg?maxAge=2592000&style=flat-square
-
-### [recordFrom](https://github.com/unctionjs/recordFrom#readme)()
-
-![Tests][BADGE_TRAVIS]
-![Stability][BADGE_STABILITY]
-![Dependencies][BADGE_DEPENDENCY]
-
-```
-KeyChain => Value => Functor
-```
-
-Given a keychain and a value it creates an object that has keys based on the keychain.
-
-``` javascript
-recordFrom(["key", "subkey"])("value")
-```
-
-Which returns:
-
-``` javascript
-{
-  key: {
-    subkey: "value"
-  }
-}
-```
-
-[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/recordFrom.svg?maxAge=2592000&style=flat-square
-[BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
-[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/recordFrom.svg?maxAge=2592000&style=flat-square
 
 ### [reduceValues](https://github.com/unctionjs/reduceValues#readme)()
 
@@ -2657,27 +2575,6 @@ Which will return:
 
 [BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
 [BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/reduceValues.svg?maxAge=2592000&style=flat-square
-
-### [keys](https://github.com/unctionjs/keys#readme)()
-
-![Tests][BADGE_TRAVIS]
-![Stability][BADGE_STABILITY]
-![Dependencies][BADGE_DEPENDENCY]
-
-```
-KeyedFunctor => Array<Key>
-```
-
-Takes a keyed iterable and returns the keys as an Array.
-
-``` javascript
-keys({aaa: "111", bbb: "222"}) // ["aaa", "bbb"]
-keys(["111", "222"]) // [0, 1]
-```
-
-[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/keys.svg?maxAge=2592000&style=flat-square
-[BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
-[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/keys.svg?maxAge=2592000&style=flat-square
 
 ### [pipe](https://github.com/unctionjs/pipe#readme)()
 
@@ -3331,26 +3228,6 @@ sequence({x: increment, y: decrement, z: itself})(1) // {x: 2, y: 0, z: 1}
 [BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
 [BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/sequence.svg?maxAge=2592000&style=flat-square
 
-### [selectValues](https://github.com/unctionjs/selectValues#readme)()
-
-![Tests][BADGE_TRAVIS]
-![Stability][BADGE_STABILITY]
-![Dependencies][BADGE_DEPENDENCY]
-
-```
-PredicateFunction => Functor => Functor
-```
-
-Given a predicate and a functor it returns a functor of the same type containing values that returned true for the predicate.
-
-``` javascript
-selectValues(isOdd)([1, 2, 3, 4]) // [1, 3]
-```
-
-[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/selectValues.svg?maxAge=2592000&style=flat-square
-[BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
-[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/selectValues.svg?maxAge=2592000&style=flat-square
-
 ### [inflateTree](https://github.com/unctionjs/inflateTree#readme)()
 
 ![Tests][BADGE_TRAVIS]
@@ -3446,10 +3323,10 @@ of(null)("bbb")([]) // ["bbb"]
 ![Dependencies][BADGE_DEPENDENCY]
 
 ```
-KeyedFunctor<Predicate> => KeyedFunctor => boolean
+KeyedEnumerable<PredicateFunction> => KeyedEnumerable => boolean
 ```
 
-Compares a Keyed Functor of Predicate Functions to a Functor of values. It is partial and prefers truthiness (meaning it only checks a key on the Functor if there is a key on the matcher).
+Compares a Keyed Enumerable of Predicate Functions to a Enumerable of values. It is partial and prefers truthiness (meaning it only checks a key on the Functor if there is a key on the matcher).
 
 ``` javascript
 where(
@@ -3598,7 +3475,7 @@ new Map([
 ![Dependencies][BADGE_DEPENDENCY]
 
 ```
-(Record => Key) => List<Record> => Record<List<Record>>
+(Enumerable<Value> => Key) => (Enumerable<Value>) => Map<Key, Enumerable<Value>>
 ```
 
 Creates a record tree where the key is a computation on the value and the value is a list of the values that match with that computation.
@@ -3623,8 +3500,8 @@ groupBy(
 Which returns:
 
 ``` javascript
-{
-  person: [
+Map {
+  "person" => [
     {
       id: "aaa",
       name: "Kurtis Rainbolt-Greene",
@@ -3637,44 +3514,45 @@ Which returns:
     },
   ],
 }
+
 ```
 
 ``` javascript
 groupBy(
   key("type")
 )(
-  new Set([
-    new Map([
-      ["id", "aaa"],
-      ["name", "Kurtis Rainbolt-Greene"]
-      ["type", "person"],
-    ]),
-    new Map([
-      ["id", "bbb"],
-      ["name", "Angela Rainbolt-Greene"]
-      ["type", "person"],
-    ])
-  ])
+  Set [
+    Map {
+      "id" => "aaa",
+      "name" => "Kurtis Rainbolt-Greene"
+      "type" => "person",
+    },
+    Map {
+      "id" => "bbb",
+      "name" => "Angela Rainbolt-Greene"
+      "type" => "person",
+    }
+  ]
 )
 ```
 
 Which returns:
 
 ``` javascript
-new Map([
-  ["person", new Set([
-    new Map([
-      ["id", "aaa"],
-      ["name", "Kurtis Rainbolt-Greene"],
-      ["type", "person"],
-    ]),
-    new Map([
-      ["id", "bbb"],
-      ["name", "Angela Rainbolt-Greene"],
-      ["type", "person"],
-    ])
-  ])],
-])
+Map {
+  "person" => Set [
+    Map {
+      "id" => "aaa",
+      "name" => "Kurtis Rainbolt-Greene",
+      "type" => "person",
+    },
+    Map {
+      "id" => "bbb",
+      "name" => "Angela Rainbolt-Greene",
+      "type" => "person",
+    }
+  ],
+}
 ```
 
 [BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/groupBy.svg?maxAge=2592000&style=flat-square
@@ -3694,12 +3572,14 @@ Functor => Functor
 Takes a multi-dimensional functor and decreases the nesting by one.
 
 ``` javascript
+import {from} from "most"
+
 flatten([["a", "b"], ["c", "d"]]) // ["a", "b", "c", "d"]
 flatten(["a", "b", ["c", "d"]]) // ["a", "b", "c", "d"]
 flatten(
-  xstream.from([
-    xstream.from(["a", "b"]),
-    xstream.from(["c", "d"]),
+  from([
+    from(["a", "b"]),
+    from(["c", "d"]),
   ])
 ) // ---a---b---c---d---|
 ```
@@ -3734,5 +3614,206 @@ isEnumerable(most.from([])) // true
 [BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/isEnumerable.svg?maxAge=2592000&style=flat-square
 [BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
 [BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/isEnumerable.svg?maxAge=2592000&style=flat-square
+
+### [domElements](https://github.com/unctionjs/domElements#readme)()
+
+![Tests][BADGE_TRAVIS]
+![Stability][BADGE_STABILITY]
+![Dependencies][BADGE_DEPENDENCY]
+
+```
+mixed => mixed
+```
+
+An example function.
+
+``` javascript
+domElements(1) // 1
+```
+
+[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/domElements.svg?maxAge=2592000&style=flat-square
+[BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
+[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/domElements.svg?maxAge=2592000&style=flat-square
+
+### [keyChainTree](https://github.com/unctionjs/keyChainTree#readme)()
+
+![Tests][BADGE_TRAVIS]
+![Stability][BADGE_STABILITY]
+![Dependencies][BADGE_DEPENDENCY]
+
+```
+RecordTree => Array<KeyChain>
+```
+
+Takes a tree and returns all keychains for that tree. Note, it only follows record types (types with keys).
+
+``` javascript
+keyChainTree({
+  id: "1",
+  attributes: {
+    name: "Kurtis Rainbolt-Greene",
+    age: 24,
+  },
+  meta: new Map([
+    ["version", "1.0.0"],
+  ]),
+  included: [
+    {
+      id: "2",
+      attributes: {
+        name: "Angela Englund",
+      },
+    },
+  ],
+})
+```
+
+which would return
+
+``` javascript
+[
+  ["id"],
+  ["attributes", "name"],
+  ["attributes", "age"],
+  ["meta", "version"],
+  ["included"],
+]
+```
+
+[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/keyChainTree.svg?maxAge=2592000&style=flat-square
+[BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
+[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/keyChainTree.svg?maxAge=2592000&style=flat-square
+
+### [dig](https://github.com/unctionjs/dig#readme)()
+
+![Tests][BADGE_TRAVIS]
+![Stability][BADGE_STABILITY]
+![Dependencies][BADGE_DEPENDENCY]
+
+```
+KeyChain => Tree => Value
+```
+
+Takes a chain of keys and a tree, traversing down and reaching the last value. If any part of the chain is undefined or not an object the result will always be undefined.
+
+``` javascript
+dig(["aaa", "bbb", "ccc"])({aaa: {bbb: {ccc: "1"}}}) // "1"
+dig(["aaa", "ddd", "ccc"])({aaa: {bbb: {ccc: "1"}}}) // undefined
+```
+
+[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/dig.svg?maxAge=2592000&style=flat-square
+[BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
+[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/dig.svg?maxAge=2592000&style=flat-square
+
+### [getMany](https://github.com/unctionjs/getMany#readme)()
+
+![Tests][BADGE_TRAVIS]
+![Stability][BADGE_STABILITY]
+![Dependencies][BADGE_DEPENDENCY]
+
+```
+KeyedEnumerable => Array<Key>
+```
+
+Takes a keyed enumerable and returns the keys as an Array.
+
+``` javascript
+getMany({aaa: "111", bbb: "222"}) // ["aaa", "bbb"]
+getMany(["111", "222"]) // [0, 1]
+```
+
+[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/getMany.svg?maxAge=2592000&style=flat-square
+[BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
+[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/getMany.svg?maxAge=2592000&style=flat-square
+
+### [objectFrom](https://github.com/unctionjs/objectFrom#readme)()
+
+![Tests][BADGE_TRAVIS]
+![Stability][BADGE_STABILITY]
+![Dependencies][BADGE_DEPENDENCY]
+
+```
+KeyChain => Value => Enumerable
+```
+
+Given a keychain and a value it creates an object that has keys based on the keychain.
+
+``` javascript
+objectFrom(["key", "subkey"])("value")
+```
+
+Which returns:
+
+``` javascript
+{
+  key: {
+    subkey: "value"
+  }
+}
+```
+
+[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/objectFrom.svg?maxAge=2592000&style=flat-square
+[BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
+[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/objectFrom.svg?maxAge=2592000&style=flat-square
+
+### [selectByValue](https://github.com/unctionjs/selectByValue#readme)()
+
+![Tests][BADGE_TRAVIS]
+![Stability][BADGE_STABILITY]
+![Dependencies][BADGE_DEPENDENCY]
+
+```
+PredicateFunction => Enumerable => Enumerable
+```
+
+Given an enumerable and a predicate and produce the set or subset of that based on the predicate matched to the values.
+
+``` javascript
+selectByValue(isOdd)([1, 2, 3, 4]) // [1, 3]
+```
+
+[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/selectByValue.svg?maxAge=2592000&style=flat-square
+[BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
+[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/selectByValue.svg?maxAge=2592000&style=flat-square
+
+### [rejectByValue](https://github.com/unctionjs/rejectByValue#readme)()
+
+![Tests][BADGE_TRAVIS]
+![Stability][BADGE_STABILITY]
+![Dependencies][BADGE_DEPENDENCY]
+
+```
+mixed => mixed
+```
+
+An example function.
+
+``` javascript
+rejectByValue(1) // 1
+```
+
+[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/rejectByValue.svg?maxAge=2592000&style=flat-square
+[BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
+[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/rejectByValue.svg?maxAge=2592000&style=flat-square
+
+### [reversal](https://github.com/unctionjs/reversal#readme)()
+
+![Tests][BADGE_TRAVIS]
+![Stability][BADGE_STABILITY]
+![Dependencies][BADGE_DEPENDENCY]
+
+```
+PredicateFunction => PredicateFunction
+```
+
+Takes a predicate and returns the reverse of that predicate.
+
+``` javascript
+reversal(isNull)(null) // false
+```
+
+[BADGE_TRAVIS]: https://img.shields.io/travis/unctionjs/reversal.svg?maxAge=2592000&style=flat-square
+[BADGE_STABILITY]: https://img.shields.io/badge/stability-strong-green.svg?maxAge=2592000&style=flat-square
+[BADGE_DEPENDENCY]: https://img.shields.io/david/unctionjs/reversal.svg?maxAge=2592000&style=flat-square
 
 {% endraw %}
